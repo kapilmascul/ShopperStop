@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Product page</title>
+    <title>Document</title>
     <link rel="stylesheet" href="style/navbar.css">
     <link rel="stylesheet" href="style/footer.css">
     <link rel="stylesheet" href="style/index.css">
@@ -41,7 +41,7 @@
     <div id="burger">
         <div>Register/Login</div>
         <div>Wishlist</div>
-        <div id="cartBtn">Cart</div>
+        <div>Cart</div>
     </div>
     <!-- NAVBAR END HERE -->
 
@@ -88,66 +88,10 @@
     </div> -->
 </body>
 </html>
-
 <script>
-    let cartBtn=document.getElementById("cartBtn")
     let container=document.getElementById("container")
-    let data=async()=>{
-        await fetch("http://localhost:9090/products")
-    .then((res)=>res.json())
-    .then((res)=>{
-        console.log(res.data)
-        displayData(res.data)
-    })
-    .catch((err)=>{
-        console.log(err)   
-    })
-   
-    }
 
-    data()
+    let cartData=localStorage.getItem("cart")||[]
 
-    let displayData=(data)=>{
-
-        data.forEach(element => {
-        let card=document.createElement("div")
-       let img=document.createElement("img")
-       img.src=element.img;
-       let title=document.createElement("h2")
-       title.innerText=element.title;
-       let price=document.createElement("h4")
-       price.innerText=element.price;
-       let rating=document.createElement("h4")
-       rating.innerText=element.rating
-       let cart=document.createElement("button")
-       cart.textContent="Add To Cart"
-
-       cart.addEventListener("click",()=>{
-        alert("Item added to cart")
-        localStorage.setItem("cart",JSON.stringify(element))
-       })
-       card.append(img,title,price,rating,cart)
-       container.append(card)
-        });
-      
-    }
-   
-   
-
+    container.append(cartData)
 </script>
-
-<script type="module">
-    import footer from "./components/footer.js";
-    document.getElementById("footer").innerHTML = footer();
-  </script>
-  <script type="module">
-    import navbar from "./components/navbar.js";
-    document.getElementById("navbar").innerHTML = navbar();
-  </script>
-
-<script>
-     cartBtn.addEventListener("click",()=>{
-        window.location.href="./cart.html"
-    })
-</script>
-
